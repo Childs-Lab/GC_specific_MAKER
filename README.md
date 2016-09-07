@@ -14,3 +14,28 @@ MAKER_GC_training_set_create.pl  --transcript <path to predicted transcripts fas
 The name parameter serves as a prefix for all output files from this script, which include FASTA files of the selected transcripts for HMM training and the corresponding GFF3 file for these transcripts. 
 
 It should be noted that during the process of SNAP training the total GC content and therefore the number of genes falling below or above the designated cutoffs may be too few for AUGUSTUS training. For GC specific HMM training in O. sativa, SNAP1 transcripts were used for AUGUSTUS training instead of SNAP2 due to this limitation of available transcripts meeting the threshold for AUGUSTUS training. 
+
+==========================================
+
+To assess the impact of GC specific HMM training on the structural annotation of O. sativa, three MAKER annotations were created using HMMs trained with transcripts from the default annotation with randomized GC content. The following perl scripts were used, which create the training GFF3 files based on a random seed instead of percentage GC content. 
+
+```
+random_dataset_generate.pl --transcript < name of file for fasta_merge results from est2genome datastore> --random1 <name of output random file1> --random2 <name of output random file2> --random3 <name of output random file3>
+```
+```
+seq_name.pl --fastafile <path to an output of random_dataset_generate.pl> --output <name of text file with ID names for each FASTA file>
+```
+```
+random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --rand_1 <path to random 1 IDs> --rand_2 <path to random 2 IDs>  --rand_3 <path to random 3 IDs>
+```
+The outputs of these steps are three GFF3 files containing the coordinates of randomly selected gene predictions. Each of these GFF3 files were then used for SNAP or AUGUSTUS training. 
+
+
+
+
+
+
+
+
+
+
