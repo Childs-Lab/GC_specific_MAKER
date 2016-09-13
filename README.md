@@ -27,7 +27,7 @@ train_augustus.sh <path to working directory for training> <path to MAKER gff3 o
 ```
 
 ==========================================
-###Creation of random MAKER annotations
+###Creation of randomized MAKER annotations
 
 To assess the impact of GC specific HMM training on the structural annotation of O. sativa, three MAKER annotations were created using HMMs trained with transcripts from the default annotation with randomized GC content. The following perl scripts were used, which create the training GFF3 files based on a random seed instead of percentage GC content. 
 
