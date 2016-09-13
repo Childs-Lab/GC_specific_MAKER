@@ -39,8 +39,7 @@ random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --ra
 ```
 The outputs of these steps are three GFF3 files containing the coordinates of randomly selected gene predictions. Each of these GFF3 files were then used for SNAP or AUGUSTUS training. 
 
-
-
+![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.pdf)
 
 
 
