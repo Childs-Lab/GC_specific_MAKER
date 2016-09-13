@@ -1,6 +1,9 @@
 # GC Specific MAKER
 ###This repo contains the Perl code from "A modified GC-specific MAKER structural genome annotation method reveals improved and novel gene predictions of high and low GC content in Oryza sativa" Bowman et al, 2016.
 
+![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.png "GC Specific MAKER")
+
+
 The MAKER_GC_cutoff_determination.pl script helps to identify the GC values of the peaks in a bimodal grass gene GC content distribution. The script pulls out the CDS fasta sequences for the transcript-based gene predictions from the GFF3 and calculates the GC content for each gene prediction.  The script assigns the gene GC values to integer bins and writes the results to a file. This output file can be used in R to plot the distribution of gene GC content. A fasta file of the CDS sequences and a GC content file (showing nucleotide composition and GC content of each prediction) are also produced. In addition, a text file is created with the high and low peak values of the bimodal gene GC distribution that serve as set points in creating the high and low GC HMM training sets. However, users may pick their own high-GC and low-GC cutoff values, and the gene GC content distribution graph may aid in picking those cutoff values.
 
 ```
@@ -39,7 +42,6 @@ random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --ra
 ```
 The outputs of these steps are three GFF3 files containing the coordinates of randomly selected gene predictions. Each of these GFF3 files were then used for SNAP or AUGUSTUS training. 
 
-![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.png)
 
 
 
