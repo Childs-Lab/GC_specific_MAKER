@@ -8,23 +8,22 @@
 # UCSC Utils - http://hgdownload.cse.ucsc.edu/admin/exe/
 
 # Additionally, the script, fathom_to_genbank.pl, is required and can be found at github: https://github.com/Childs-Lab/GC_specific_MAKER.
-# This script must be available in your $PATH.
 # This script requires BioPerl.
 
 # Kevin Childs
 
 WORKING_DIR=$1
-DATASTORE_INDEX_LOG=$2
+MAKER_GFF_FILE_W_FASTA=$2
 AUGUSTUS_SPECIES_NAME=$3
 GENOME_FASTA=$4
 CDNA_FASTA=$5
 
 
-if [[ -z $WORKING_DIR || -z $DATASTORE_INDEX_LOG || -z $AUGUSTUS_SPECIES_NAME || -z $GENOME_FASTA || -z $CDNA_FASTA ]]; then
-    echo "Usage: $0 WORKING_DIR  DATASTORE_INDEX_LOG  AUGUSTUS_SPECIES_NAME  GENOME_FASTA  CDNA_FASTA"
+if [[ -z $WORKING_DIR || -z $MAKER_GFF_FILE_W_FASTA || -z $AUGUSTUS_SPECIES_NAME || -z $GENOME_FASTA || -z $CDNA_FASTA ]]; then
+    echo "Usage: $0 WORKING_DIR  MAKER_GFF_FILE_W_FASTA  AUGUSTUS_SPECIES_NAME  GENOME_FASTA  CDNA_FASTA"
     exit 1
-elif [ ! -e $DATASTORE_INDEX_LOG ]; then
-    echo "The previous index log file does not exist: $DATASTORE_INDEX_LOG"
+elif [ ! -e $MAKER_GFF_FILE_W_FASTA ]; then
+    echo "The previous index log file does not exist: $MAKER_GFF_FILE_W_FASTA"
     exit 1
 elif [ ! -e $GENOME_FASTA ]; then
     echo "The genome fasta file does not exist: $GENOME_FASTA"
@@ -35,13 +34,13 @@ elif [ ! -e $CDNA_FASTA ]; then
 fi
 
 
-# 1. Convert the maker output to zff format using the maker datastore log file
+# 1. Convert the maker output to zff format using high-quality MAKER gene predictions from a MAKER gff file that also has the genome assembly included.
 
 echo 'cd $WORKING_DIR'
 cd $WORKING_DIR
 
-echo 'maker2zff -x 0.2 -l 200 -d $DATASTORE_INDEX_LOG'
-maker2zff -x 0.2 -l 200 -d $DATASTORE_INDEX_LOG
+echo 'maker2zff -x 0.2 -l 200  $MAKER_GFF_FILE_W_FASTA'
+maker2zff -x 0.2 -l 200  $MAKER_GFF_FILE_W_FASTA
 
 
 # output: genome.ann (ZFF file)
@@ -68,8 +67,8 @@ echo "number after split: $NUMSPLIT"
 #    fathom_to_genbank.pl is available on github: https://github.com/Childs-Lab/GC_specific_MAKER.
 #    Modify the path here, or ensure that fathom_to_genbank.pl is in your $PATH.
 
-echo 'fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}'
-fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}
+echo '/data/run/kchilds/scripts/maker/fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}'
+/data/run/kchilds/scripts/maker/fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}
 
 
 # 4. Split the known genes into test and training files.
