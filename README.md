@@ -32,12 +32,16 @@ train_augustus.sh <path to working directory for training> <path to MAKER gff3 o
 
 To assess the impact of GC specific HMM training on the structural annotation of O. sativa, three MAKER annotations were created using HMMs trained with transcripts from the default annotation with randomized GC content. The following perl scripts were used, which create the training GFF3 files based on a random seed instead of percentage GC content. 
 
+The random_dataset_generate.pl script inputs the MAKER standard transcript FASTA and outputs three transcript FASTAs that are used for downstream GFF3 creation and HMM training.
+
 ```
 random_dataset_generate.pl --transcript < name of file for fasta_merge results from est2genome datastore> --random1 <name of output random file1> --random2 <name of output random file2> --random3 <name of output random file3>
 ```
+The seq_name.pl script is run for each of the three random output FASTA files, which generates a list of MAKER standard transcript names from each transcript FASTA.
 ```
 seq_name.pl --fastafile <path to an output of random_dataset_generate.pl> --output <name of text file with ID names for each FASTA file>
 ```
+Finally, the random_GFF3_create.pl script inputs the MAKER standard GFF3 with the genome FASTA included and generates the final randomized GFF3s that are used for SNAP and AUGUSTUS HMM training. 
 ```
 random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --rand_1 <path to random 1 IDs> --rand_2 <path to random 2 IDs>  --rand_3 <path to random 3 IDs>
 ```
