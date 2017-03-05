@@ -81,6 +81,10 @@ while (my $line = <$maker_gff>) {
 	    while (my $line = <$maker_gff>) {
 		chomp $line;
 
+		if ($line =~ /^#/){
+		    last;
+		}
+
 		my @check_cds = split /\t/, $line;
 		my $feature = $check_cds[2];
 
@@ -217,10 +221,11 @@ open my $output2_fh, ">$CUTOFF_OUT" or die "cant open cut off output file";
 
 
 ## this section bins the GC into integers and does a total gene count for each bin
-my @lines = <$codonw_in_fh>;
-my $total_number_genes = @lines;
 
-foreach my $gene (@lines) {
+my $total_number_genes = 0;
+
+while (my $gene = <$codonw_in_fh>) {
+    ++$total_number_genes;
     chomp $gene;
     if ($gene =~ /GC/) {
         next;
@@ -228,7 +233,12 @@ foreach my $gene (@lines) {
     else {
         my @split_gene = split /\t/, $gene;
         # times the following by 100 for codon and use index 10
+	if (!exists($split_gene[6])) {
+	    next;
+	}
         my $GC = ($split_gene[6]);
+	#print "$gene\n";
+	#print "$GC\n";
         my $rounded_GC = int ($GC+0.5);
         if (!exists $hash{$rounded_GC}) {
             $hash{$rounded_GC} = 1;
@@ -329,11 +339,11 @@ elsif (@peaks == 1){
 }
 elsif (@peaks == 2){
     if (($peaks[0] == 0) || ($peaks[1] == 0)){
-        print "this is not a bimodel distribution, the peak value can be see in $CUTOFF_OUT use $DIST_OUT to confirm graphically\n";
+        print "this is not a bimodal distribution, the peak value can be seen in $CUTOFF_OUT use $DIST_OUT to confirm graphically\n";
         print $output2_fh $keys[$peaks[0]];
     }
     else{
-        print "bimodel distribution: see $CUTOFF_OUT for low and high GC cut offs. confirm with graph using $DIST_OUT\n";
+        print "bimodal distribution: see $CUTOFF_OUT for low and high GC cut offs. confirm with graph using $DIST_OUT\n";
         print $output2_fh $keys[$peaks[0]]."\t". $keys[$peaks[1]];
     }
 }
@@ -353,7 +363,7 @@ elsif (@peaks >=3){
     my $want2 = $p2;
     my $index2 = 0;
     ++$index2 until $values[$index2] == $want2 or $index2 > $#values;
-    print "bimodel distribution: see $CUTOFF_OUT for low and high GC cut offs. confirm with graph using $DIST_OUT\n";
+    print "bimodal distribution: see $CUTOFF_OUT for low and high GC cut offs. confirm with graph using $DIST_OUT\n";
     print $output2_fh  $keys[$index]."\t ".$keys[$index2];
 }
 #--------------------------------------------------------------------------------------------------------------------#

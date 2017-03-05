@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#!/usr/bin/perl -w
 
 # fathom_to_genbank.pl
 
