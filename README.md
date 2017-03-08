@@ -67,7 +67,7 @@ create_maker_standard_gff.pl  --input_gff <output of gff3_merge> --output_gff <p
 ==========================================
 ###Filtering gene sets for transposable elements
 
-Predicted proteins were compared to a database of Gypsy transposable elements (3.1.b2).  Predicted proteins were also aligned with blastp to a database of [transposases]( http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/Repeat_Library_Construction-Advanced). A GFF3 file of TE-related genes was derived from the MSU-RGAP gene annotation GFF3 [file] (http://rice.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_7.0/all.dir/all.gff3) and was compared to the MAKER standard GFF3 file using [gffcompare](https://github.com/gpertea/gffcompare).
+Predicted proteins were compared to a database of [Gypsy transposable elements (3.1.b2)](http://gydb.org/index.php/Collection_alignments).  Predicted proteins were also aligned with blastp to a database of [transposases]( http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/Repeat_Library_Construction-Advanced). A GFF3 file of TE-related genes was derived from the MSU-RGAP gene annotation GFF3 [file] (http://rice.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_7.0/all.dir/all.gff3) and was compared to the MAKER standard GFF3 file using [gffcompare](https://github.com/gpertea/gffcompare).
 
 ```
 hmmscan --tblout <Gypsy HMM analysis output> -E 1e-5 --domE 1e-5 <path to gypsy_db_3.1b2.hmm> <path to maker standard proteins fasta> 
