@@ -41,9 +41,9 @@ The seq_name.pl script is run for each of the three random output FASTA files, w
 ```
 seq_name.pl --fastafile <path to an output of random_dataset_generate.pl> --output <name of text file with ID names for each FASTA file>
 ```
-Finally, the random_GFF3_create.pl script inputs the MAKER standard GFF3 with the genome FASTA included and generates the final randomized GFF3s that are used for SNAP and AUGUSTUS HMM training. 
+Finally, the random_gff3_create.pl script inputs the MAKER standard GFF3 with the genome FASTA included and generates the final randomized GFF3s that are used for SNAP and AUGUSTUS HMM training. 
 ```
-random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --rand_1 <path to random 1 IDs> --rand_2 <path to random 2 IDs>  --rand_3 <path to random 3 IDs>
+random_gff3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --rand_1 <path to random 1 IDs> --rand_2 <path to random 2 IDs>  --rand_3 <path to random 3 IDs>
 ```
 The outputs of these steps are three GFF3 files containing the coordinates of randomly selected gene predictions. Each of these GFF3 files were then used for SNAP or AUGUSTUS training. 
 
