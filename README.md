@@ -10,10 +10,10 @@ The MAKER_GC_cutoff_determination.pl script helps to identify the GC values of t
 ```
 MAKER_GC_cutoff_determination.pl  --fasta <full path to file with genome fasta sequences> --gff <full path to maker created GFF3 of est2genome> --name <base name for output files> --peak <peak determination window, odd integer, default is 5> --smooth <smoothing window, odd integer, default is 7>
 ```
-The MAKER_GC_training_set_create.pl script will create high-GC and low-GC data sets that can be used for training SNAP or AUGUSTUS. The name parameter serves as a prefix for all output files from this script, which include FASTA files of the selected transcripts for HMM training and the corresponding GFF3 file for these transcripts. 
+The MAKER_GC_training_set_create.py script will create high-GC and low-GC data sets that can be used for training SNAP or AUGUSTUS. The name parameter serves as a prefix for all output files from this script, which include FASTA files of the selected transcripts for HMM training and the corresponding GFF3 file for these transcripts. 
 
 ```
-MAKER_GC_training_set_create.pl  --transcript <path to predicted transcripts fasta file>  --align_gff <full path to maker created GFF3 of est2genome with FASTA included> --name <prefix for the output files> --cutoffs <path to the cutoff output file>
+MAKER_GC_training_set_create.py --input_file_gff <path to MAKER GFF file> --input_file_GC_content <BASE_NAME_gc_content.txt file> --input_file_GC_cutoff <BASE_NAME_cutoff.txt file> --output_file_low <path to the low GC GFF file> --output_file_high <path to the high GC GFF file> --genome_fasta <path to the genome fasta file>
 ```
 The name parameter serves as a prefix for all output files from this script, which include FASTA files of the selected transcripts for HMM training and the corresponding GFF3 file for these transcripts. 
 
