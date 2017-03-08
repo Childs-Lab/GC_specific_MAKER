@@ -1,7 +1,7 @@
 # GC Specific MAKER
 ###This repo contains the Perl code from "A modified GC-specific MAKER structural genome annotation method reveals improved and novel gene predictions of high and low GC content in Oryza sativa" Bowman et al, 2017.
 
-![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.pdf "GC Specific MAKER")
+![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.png "GC Specific MAKER")
 
 **Figure 3. Six HMMs MAKER structural annotation method. The center workflow depicts the standard method for training hidden markov models for use in MAKER, while the low GC (top) and high GC (bottom) training methods can be used after creating high and low GC HMM training data sets. After separately training HMMs with the high and low GC training data, all three SNAP HMMs and all three AUGUSTUS HMMs were specified with the maker_opts.ctl file, and MAKER was run to create the six HMMs annotation, which incorporates gene predictions from the standard, high and low GC MAKER runs.**
 
