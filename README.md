@@ -1,5 +1,5 @@
 # GC Specific MAKER
-###This repo contains the Perl code from "A modified GC-specific MAKER structural genome annotation method reveals improved and novel gene predictions of high and low GC content in Oryza sativa" Bowman et al, 2017.
+###This repo contains the Perl and Python code from "A modified GC-specific MAKER structural genome annotation method reveals improved and novel gene predictions of high and low GC content in Oryza sativa" Bowman et al, 2017.
 
 ![GC MAKER](https://github.com/Childs-Lab/GC_specific_MAKER/blob/master/gc_paper_Figure_3.png "GC Specific MAKER")
 
