@@ -8,25 +8,20 @@
 # UCSC Utils - http://hgdownload.cse.ucsc.edu/admin/exe/
 
 # Additionally, the script, fathom_to_genbank.pl, is required and can be found at github: https://github.com/Childs-Lab/GC_specific_MAKER.
-# This script requires BioPerl.
 
 # Kevin Childs
 
 WORKING_DIR=$1
 MAKER_GFF_FILE_W_FASTA=$2
 AUGUSTUS_SPECIES_NAME=$3
-GENOME_FASTA=$4
-CDNA_FASTA=$5
+CDNA_FASTA=$4
 
 
-if [[ -z $WORKING_DIR || -z $MAKER_GFF_FILE_W_FASTA || -z $AUGUSTUS_SPECIES_NAME || -z $GENOME_FASTA || -z $CDNA_FASTA ]]; then
-    echo "Usage: $0 WORKING_DIR  MAKER_GFF_FILE_W_FASTA  AUGUSTUS_SPECIES_NAME  GENOME_FASTA  CDNA_FASTA"
+if [[ -z $WORKING_DIR || -z $MAKER_GFF_FILE_W_FASTA || -z $AUGUSTUS_SPECIES_NAME || -z $CDNA_FASTA ]]; then
+    echo "Usage: $0 WORKING_DIR  MAKER_GFF_FILE_W_FASTA  AUGUSTUS_SPECIES_NAME   CDNA_FASTA"
     exit 1
 elif [ ! -e $MAKER_GFF_FILE_W_FASTA ]; then
     echo "The previous index log file does not exist: $MAKER_GFF_FILE_W_FASTA"
-    exit 1
-elif [ ! -e $GENOME_FASTA ]; then
-    echo "The genome fasta file does not exist: $GENOME_FASTA"
     exit 1
 elif [ ! -e $CDNA_FASTA ]; then
     echo "The cDNA fasta file does not exist: $CDNA_FASTA"
@@ -36,19 +31,20 @@ fi
 
 # 1. Convert the maker output to zff format using high-quality MAKER gene predictions from a MAKER gff file that also has the genome assembly included.
 
-echo 'cd $WORKING_DIR'
+echo "cd $WORKING_DIR"
 cd $WORKING_DIR
 
-echo 'maker2zff -x 0.2 -l 200  $MAKER_GFF_FILE_W_FASTA'
+echo "maker2zff -x 0.2 -l 200  $MAKER_GFF_FILE_W_FASTA"
 maker2zff -x 0.2 -l 200  $MAKER_GFF_FILE_W_FASTA
 
 
 # output: genome.ann (ZFF file)
 #         genome.dna (fasta file that the coordinates in the zff can be referenced againsted)
 
+
 # 2. use the fathom  script from snap to get the unique annotations
 
-echo 'fathom genome.ann genome.dna -categorize 1000'
+echo "fathom genome.ann genome.dna -categorize 1000"
 fathom genome.ann genome.dna -categorize 1000
 
 NUMFOUND="`grep -c '>' uni.ann`"
@@ -63,46 +59,87 @@ NUMSPLIT=${TEMPSPLIT/.*}
 echo "number found after fathom: $NUMFOUND"
 echo "number after split: $NUMSPLIT"
 
+
 # 3. Convert the uni.ann and uni.dna output from fathom into a genbank formatted file.
 #    fathom_to_genbank.pl is available on github: https://github.com/Childs-Lab/GC_specific_MAKER.
 #    Modify the path here, or ensure that fathom_to_genbank.pl is in your $PATH.
 
-echo '/data/run/kchilds/scripts/maker/fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}'
-/data/run/kchilds/scripts/maker/fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}
+echo "fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}"
+fathom_to_genbank.pl  --annotation_file uni.ann  --dna_file uni.dna  --genbank_file augustus.gb  --number ${NUMFOUND}
+
+# To get the subset of fastas that correspond to the genes in the genbank file, follow these steps.
+#    get_subset_of_fastas.pl is available on github: https://github.com/Childs-Lab/GC_specific_MAKER.
+#    Modify the path here, or ensure that get_subset_of_fastas.pl is in your $PATH.
+
+perl -e  'while (my $line = <>){ if ($line =~ /^LOCUS\s+(\S+)/) { print "$1\n"; } }'  ${WORKING_DIR}/augustus.gb  >  ${WORKING_DIR}/genbank_gene_list.txt
+
+echo "get_subset_of_fastas.pl   -l  ${WORKING_DIR}/genbank_gene_list.txt    -f ${WORKING_DIR}/uni.dna  -o  ${WORKING_DIR}/genbank_gene_seqs.fasta"
+get_subset_of_fastas.pl   -l  ${WORKING_DIR}/genbank_gene_list.txt    -f ${WORKING_DIR}/uni.dna  -o  ${WORKING_DIR}/genbank_gene_seqs.fasta
 
 
 # 4. Split the known genes into test and training files.
 #    randomSplit.pl is a script provided by AUGUSTUS.
 #    Modify the path here, or ensure that randomSplit.pl is in your $PATH.
 
-echo 'randomSplit.pl ${WORKING_DIR}/augustus.gb ${NUMSPLIT}'
+echo "randomSplit.pl ${WORKING_DIR}/augustus.gb ${NUMSPLIT}"
 randomSplit.pl ${WORKING_DIR}/augustus.gb ${NUMSPLIT}
+
 
 # We will use autoAug.pl for training because we have transcript alignments that will be used as hints.
 # The etraining and optimize_augustus.pl scripts from AUGUSTUS will not be used as they do not allow for the use of hints.
 # 5. Run autoAug.pl.  
 #    This script is provided in the AUGUSTUS installation.
-#    Modify the path here, or ensure that fathom_to_genbank.pl is in your $PATH.
+#    Modify the path here, or ensure that autoAug.pl is in your $PATH.
 
-echo 'autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=$GENOME_FASTA --trainingset=${WORKING_DIR}/augustus.gb.train --cdna=$CDNA_FASTA  --noutr'
-autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=$GENOME_FASTA --trainingset=${WORKING_DIR}/augustus.gb.train --cdna=$CDNA_FASTA  --noutr
+echo "autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=${WORKING_DIR}/genbank_gene_seqs.fasta --trainingset=${WORKING_DIR}/augustus.gb.train --cdna=$CDNA_FASTA  --noutr"
+autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=${WORKING_DIR}/genbank_gene_seqs.fasta --trainingset=${WORKING_DIR}/augustus.gb.train --cdna=$CDNA_FASTA  --noutr
 
-# 6. Run the batch scripts generated by autoAug.pl
 
-echo 'cd ${WORKING_DIR}/autoAug/autoAugPred_abinitio/shells'
+# 6. Run the batch scripts generated by the previous command
+
+cd "${WORKING_DIR}/autoAug/autoAugPred_abinitio/shells"
 cd ${WORKING_DIR}/autoAug/autoAugPred_abinitio/shells
 
 # The number of ./aug# scripts is variable.  Run until the new file does not exist.
 x=1
 while [ -e ./aug${x} ]
 do
+    echo "A.  $x"
     ./aug${x}
     let x=x+1
 done
 
 
-# 7. Checked sensitivity and specificity of the newly trained AUGUSTUS HMM by using the test data.
+# 7. Run the next command as indicated by autoAug.pl in step 5.
 
-echo 'augustus --species=$AUGUSTUS_SPECIES_NAME augustus.gb.test'
+# When above jobs are finished, continue by running the command autoAug.pl
+
+echo "cd $WORKING_DIR"
+cd $WORKING_DIR
+
+echo "autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=${WORKING_DIR}/genbank_gene_seqs.fasta --useexisting --hints=${WORKING_DIR}/autoAug/hints/hints.E.gff  -v -v -v  --index=1"
+autoAug.pl --species=$AUGUSTUS_SPECIES_NAME --genome=${WORKING_DIR}/genbank_gene_seqs.fasta --useexisting --hints=${WORKING_DIR}/autoAug/hints/hints.E.gff  -v -v -v  --index=1
+
+
+# 8. Run the batch scripts as indicated by autoAug.pl in step 7.
+
+echo "cd ${WORKING_DIR}/autoAug/autoAugPred_hints/shells/"
+cd ${WORKING_DIR}/autoAug/autoAugPred_hints/shells/
+
+# The number of ./aug# scripts is variable.  Run until the new file does not exist.
+let x=1
+while [ -e ./aug${x} ]
+do
+    echo "B.  $x"
+    ./aug${x}
+    let x=x+1
+done
+
+
+# 9. Checked sensitivity and specificity of the newly trained AUGUSTUS HMM by using the test data.
+
+cd ${WORKING_DIR}
+
+echo "augustus --species=$AUGUSTUS_SPECIES_NAME augustus.gb.test"
 augustus --species=$AUGUSTUS_SPECIES_NAME augustus.gb.test
 

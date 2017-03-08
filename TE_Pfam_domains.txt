@@ -1,0 +1,182 @@
+Pfam	Domain	Description
+PF04195	Transposase_28	Putative gypsy type transposon
+PF14203	TTRAP	Putative tranposon-transfer assisting protein
+PF04986	Y2_Tnp	Putative transposase
+PF07282	OrfB_Zn_ribbon	Putative transposase DNA-binding domain
+PF13340	DUF4096	Putative transposase of IS4/5 family (DUF4096)
+PF04754	Transposase_31	Putative transposase, YhgA-like
+PF09853	DUF2080	Putative transposon-encoded protein (DUF2080)
+PF16770	RTT107_BRCT_5	Regulator of Ty1 transposition protein 107 BRCT domain
+PF16771	RTT107_BRCT_6	Regulator of Ty1 transposition protein 107 BRCT domain
+PF03732	Retrotrans_gag	Retrotransposon gag protein
+PF07999	RHSP	Retrotransposon hot spot protein
+PF12382	Peptidase_A2E	Retrotransposon peptidase
+PF00078	RVT_1	Reverse transcriptase (RNA-dependent DNA polymerase)
+PF07727	RVT_2	Reverse transcriptase (RNA-dependent DNA polymerase)
+PF13456	RVT_3	Reverse transcriptase-like
+PF07592	DDE_Tnp_ISAZ013	Rhodopirellula transposase DDE domain
+PF11427	HTH_Tnp_Tc3_1	Tc3 transposase
+PF04236	Transp_Tc5_C	Tc5 transposase C-terminal domain
+PF03221	HTH_Tnp_Tc5	Tc5 transposase DNA-binding domain
+PF13542	HTH_Tnp_ISL3	Helix-turn-helix domain of transposase family ISL3
+PF01527	HTH_Tnp_1	Transposase
+PF01548	DEDD_Tnp_IS110	Transposase
+PF01610	DDE_Tnp_ISL3	Transposase
+PF01710	HTH_Tnp_IS630	Transposase
+PF01359	Transposase_1	Transposase (partial DDE domain)
+PF13007	LZ_Tnp_IS66	Transposase C of IS166 homeodomain
+PF01609	DDE_Tnp_1	Transposase DDE domain
+PF13612	DDE_Tnp_1_3	Transposase DDE domain
+PF13586	DDE_Tnp_1_2	Transposase DDE domain
+PF13737	DDE_Tnp_1_5	Transposase DDE domain
+PF13751	DDE_Tnp_1_6	Transposase DDE domain
+PF13701	DDE_Tnp_1_4	Transposase DDE domain group 1
+PF14706	Tnp_DNA_bind	Transposase DNA-binding
+PF05598	DUF772	Transposase domain (DUF772)
+PF02992	Transposase_21	Transposase family tnp2
+PF02371	Transposase_20	Transposase IS116/IS110/IS902 family
+PF01797	Y1_Tnp	Transposase IS200 like
+PF13843	DDE_Tnp_1_7	Transposase IS4
+PF03050	DDE_Tnp_IS66	Transposase IS66 family
+PF12017	Tnp_P_element	Transposase protein
+PF02281	Dimer_Tnp_Tn5	Transposase Tn5 dimerisation domain
+PF14319	Zn_Tnp_IS91	Transposase zinc-binding domain
+PF12760	Zn_Tnp_IS1595	Transposase zinc-ribbon domain
+PF13963	Transpos_assoc	Transposase-associated domain
+PF00872	Transposase_mut	Transposase, Mutator family
+PF14198	TnpV	Transposon-encoded protein TnpV
+PF14202	TnpW	Transposon-encoded protein TnpW
+PF01498	HTH_Tnp_Tc3_2	Transposase
+PF01526	DDE_Tnp_Tn3	Tn3 transposase DDE domain
+PF11426	Tn7_TnsC_Int	Tn7 transposition regulator TnsC
+PF15978	TnsD	Tn7-like transposition protein D
+PF12596	Tnp_P_element_C	87kDa Transposase
+PF09299	Mu-transpos_C	Mu transposase, C-terminal
+PF03108	DBD_Tnp_Mut	MuDR family transposase
+PF10551	MULE	MULE transposase domain
+PF12384	Peptidase_A2B	Ty3 transposon peptidase
+PF01021	TYA	TYA transposon protein
+PF06122	TraH	Conjugative relaxosome accessory transposon protein
+PF12642	TpcC	Conjugative transposon protein TcpC
+PF10626	TraO	Conjugative transposon protein TraO
+PF09035	Tn916-Xis	Excisionase from transposon Tn916
+PF14223	Retrotran_gag_2	gag-polypeptide of LTR copia-type
+PF14244	Retrotran_gag_3	gag-polypeptide of LTR copia-type
+PF12762	DDE_Tnp_IS1595	ISXO2-like transposase domain
+PF02994	Transposase_22	L1 transposable element
+PF13005	zf-IS66	zinc-finger binding domain of transposase IS66
+PF14690	zf-ISL3	zinc-finger of transposase IS204/IS1001/IS1096/IS1165
+PF03004	Transposase_24	Plant transposase (Ptta/En/Spm family)
+PF04827	Plant_tran	Plant transposon protein
+PF01385	OrfB_IS605	Probable transposase
+PF10599	Nup_retrotrp_bd	Retro-transposon transporting motif
+PF03017	Transposase_23	TNP1/EN/SPM transposase
+PF10683	DBD_Tnp_Hermes	Hermes transposase DNA-binding domain
+PF07863	CtnDOT_TraJ	Homologues of TraJ from Bacteroides conjugative transposon
+PF05380	Peptidase_A17	Pao retrotransposon peptidase
+PF13022	HTH_Tnp_1_2	Helix-turn-helix of insertion element transposase
+PF13006	Nterm_IS4	Insertion element 4 transposase N-terminal
+PF02914	DDE_2	Bacteriophage Mu transposase
+PF03400	DDE_Tnp_IS1	IS1 transposase
+PF04693	DDE_Tnp_2	Archaeal putative transposase ISC1217
+PF09077	Phage-MuB_C	Mu B transposition protein, C terminal
+PF12784	PDDEXK_2	PD-(D/E)XK nuclease family transposase
+PF14529	Exo_endo_phos_2	Endonuclease-reverse transcriptase
+PF10536	PMD	Plant mobile domain
+PF13610	DDE_Tnp_IS240	DDE domain
+PF03184	DDE_1	DDE superfamily endonuclease
+PF13358	DDE_3	DDE superfamily endonuclease
+PF13359	DDE_Tnp_4	DDE superfamily endonuclease
+PF13546	DDE_5	DDE superfamily endonuclease
+PF13808	DDE_Tnp_1_assoc	DDE_Tnp_1-associated
+PF13842	Tnp_zf-ribbon_2	DDE_Tnp_1-like zinc-ribbon
+PF03078	ATHILA	ATHILA ORF-1 family
+PF14214	Helitron_like_N	Helitron helicase-like domain at N-terminus
+PF13613	HTH_Tnp_4	Helix-turn-helix of DDE superfamily endonuclease
+PF03716	WCCH	WCCH motif
+PF08721	Tn7_Tnp_TnsA_C	TnsA endonuclease C terminal
+PF08722	Tn7_Tnp_TnsA_N	TnsA endonuclease N terminal
+PF00077	RVP	Retroviral aspartyl protease
+PF08284	RVP_2	Retroviral aspartyl protease
+PF09357	RteC	RteC protein
+PF12648	TcpE	TcpE family
+PF00075	RnaseH	RNase H     
+PF00098	zf-CCHC	Zinc knuckle     
+PF00424	REV	REV protein (anti-repression trans-activator protein)  
+PF00429	TLV_coat	ENV polyprotein (coat polyprotein)   
+PF00469	F-protein	Negative factor, (F-Protein) or Nef  
+PF00516	GP120	Envelope glycoprotein GP120    
+PF00517	GP41	Envelope Polyprotein GP41    
+PF00522	VPR	VPR/VPX protein     
+PF00539	Tat	Transactivating regulatory protein (Tat)   
+PF00540	Gag_p17	gag gene protein p17 (matrix protein) 
+PF00552	Integrase	Integrase DNA binding domain   
+PF00558	Vpu	Vpu protein     
+PF00559	Vif	Retroviral Vif (Viral infectivity) protein  
+PF00589	Phge_integrase	Phage integrase family    
+PF00607	Gag_p24	gag gene protein p24 (core nucleocapsid protein)
+PF00665	rve	Integrase core domain    
+PF00692	dUTPase	dUTPase      
+PF00906	Hepatitis_core	Hepatitis core antigen    
+PF00971	EIAV_GP90	EIAV coat protein, gp90   
+PF00979	Reovirus_cap	Reovirus outer capsid protein, Sigma 3 
+PF01045	EIAV_GP45	EIAV glycoprotein, gp45    
+PF01054	MMTV_SAg	Mouse mammary tumour virus superantigen  
+PF01140	Gag_MA	Matrix protein (MA), p15   
+PF01141	Gag_p12	Gag polyprotein, inner coat protein p12 
+PF01695	IstB	IstB-like ATP binding protein   
+PF02022	Integrase_Zn	Integrase Zinc binding domain   
+PF02093	Gag_p30	Gag P30 core shell protein  
+PF02228	Gag_p19	Major core protein p19   
+PF02316	Mu_DNA_bind	Mu DNA-binding domain    
+PF02337	Gag_p10	Retroviral GAG p10 protein   
+PF02411	MerT	MerT mercuric transport protein   
+PF02720	DUF222	Domain of unknown function DUF222  
+PF02813	Retro_M	Retroviral M domain    
+PF02892	zf-BED	BED zinc finger    
+PF02920	Integrase_DNA	DNA binding domain of tn916 integrase 
+PF02959	Tax	HTLV Tax     
+PF02998	Lentiviral_Tat	Lentiviral Tat protein    
+PF03056	GP36	Env gp36 protein (HERV/MMTV type)  
+PF03274	Foamy_BEL	Foamy virus BEL 42371 protein  
+PF03276	Gag_spuma	Spumavirus gag protein    
+PF03408	Foamy_virus_ENV	Foamy virus envelope protein   
+PF03539	Spuma_A9PTase	Spumavirus aspartic protease (A9)   
+PF03708	Avian_gp85	Avian retrovirus envelope protein, gp85  
+PF03811	Ins_element1	Insertion element protein    
+PF04094	DUF390	Protein of unknown function (DUF390)  
+PF04160	Borrelia_orfX	Orf-X protein     
+PF04218	CENP-B_N	CENP-B N-terminal DNA-binding domain   
+PF04582	Reo_sigmaC	Reovirus sigma C capsid protein  
+PF04740	Transposase_30	Bacillus transposase protein    
+PF04937	DUF659	Protein of unknown function (DUF 659) 
+PF05052	MerE	MerE protein     
+PF05344	DUF746	Domain of Unknown Function (DUF746)  
+PF05399	EVI2A	Ectropic viral integration site 2A protein (EVI2A)
+PF05457	Transposase_33	Sulfolobus transposase     
+PF05485	THAP	THAP domain     
+PF05599	Deltaretro_Tax	Deltaretrovirus Tax protein    
+PF05621	TniB	Bacterial TniB protein    
+PF05699	hATC	hAT family dimerisation domain   
+PF05717	Transposase_34	IS66 Orf2 like protein   
+PF05754	DUF834	Domain of unknown function (DUF834)  
+PF05840	Phage_GPA	Bacteriophage replication gene A protein (GPA) 
+PF05851	Lentivirus_VIF	Lentivirus virion infectivity factor (VIF)  
+PF05858	BIV_Env	Bovine immunodeficiency virus surface envelope protein (ENV)
+PF05928	Zea_mays_MuDR	Zea mays MURB-like protein (MuDR)  
+PF06527	TniQ	TniQ      
+PF06815	RVT_connect	Reverse transcriptase connection domain   
+PF06817	RVT_thumb	Reverse transcriptase thumb domain   
+PF07253	Gypsy	Gypsy protein     
+PF07567	zf-C2HC_plant	Protein of unknown function, DUF1544  
+PF07572	BCNT	Bucentaur or craniofacial development   
+PF08333	DUF1725	Protein of unknown function (DUF1725)  
+PF08483	IstB_N	IstB-like ATP binding N-terminal   
+PF08705	Gag_p6	Gag protein p6    
+PF08723	Gag_p15	Gag protein p15    
+PF09039	Mu_I-gamma	Mu DNA binding, I gamma subdomain 
+PF09293	RNaseH_C	T4 RNase H, C terminal  
+PF09322	DUF1979	Domain of unknown function (DUF1979)  
+PF14227	UBN2_2	UBN2_2      
+PF13975	gag-asp_proteas	gag-asp_proteas      
+PF13976	gag_pre-integrs	gag_pre-integrs      
