@@ -24,7 +24,7 @@ It should be noted that during the process of SNAP training the total GC content
 The train_augustus.sh shell script prepares training and testing data sets and makes use of the autoAug.pl training script from AUGUSTUS to create the appropriate HMM files.  
 
 ```
-train_augustus.sh <path to working directory for training> <path to MAKER gff3 output from previous MAKER run> <species name for AUGUSTUS HMM directory> <path to genome fasta file> <path to single fasta file with all transcript assemblies>
+train_augustus.sh <path to working directory for training> <path to MAKER gff3 output from initial MAKER run> <species name for AUGUSTUS HMM directory> <path to single fasta file with all transcript assemblies>
 ```
 
 ==========================================
@@ -46,6 +46,47 @@ Finally, the random_GFF3_create.pl script inputs the MAKER standard GFF3 with th
 random_GFF3_create.pl --align_gff  <path to MAKER GFF3 with FASTA included> --rand_1 <path to random 1 IDs> --rand_2 <path to random 2 IDs>  --rand_3 <path to random 3 IDs>
 ```
 The outputs of these steps are three GFF3 files containing the coordinates of randomly selected gene predictions. Each of these GFF3 files were then used for SNAP or AUGUSTUS training. 
+
+==========================================
+###Creation of MAKER standard gene sets
+
+To identify the high-quality gene set, the MAKER accessory scripts gff_merge and fasta_merge, which are included in the MAKER installation, were are used to generate a gff3 file with all gene predictions and evidence data and the transcript and protein fasta files for those predictions.  Pfam domains are identified within the predicted proteins using [hmmscan](https://www.ebi.ac.uk/interpro/search/sequence-search). 
+
+```
+hmmscan --domE 1e-5 -E 1e-5 --tblout <MAKER max predictions hmmscan output file> <path to Pfam-A.hmm> <path to predicted protein fasta file>
+```
+The annotation GFF3 file, the transcript and protein fasta files and the hmmscan results file were used to generate the final high quality MAKER standard gene set. 
+
+```
+generate_maker_standard_gene_list.pl  --input_gff <output of gff3_merge> --pfam_results <hmmscan output> --pfam_cutoff  1e-10  --output_file <path to MAKER standard gene list>
+
+get_subset_of_fastas.pl  -l <path to MAKER standard gene list> -f <fasta_merge output transcript/protein fasta>  -o <path MAKER standard transcript/protein fasta>
+
+create_maker_standard_gff.pl  --input_gff <output of gff3_merge> --output_gff <path to MAKER standard GFF3> --maker_standard_gene_list <path to MAKER standard gene list>
+```
+==========================================
+###Filtering gene sets for transposable elements
+
+Predicted proteins were compared to a database of Gypsy transposable elements (3.1.b2).  Predicted proteins were also aligned with blastp to a database of [transposases]( http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/Repeat_Library_Construction-Advanced). A GFF3 file of TE-related genes was derived from the MSU-RGAP gene annotation GFF3 [file] (http://rice.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_7.0/all.dir/all.gff3) and was compared to the MAKER standard GFF3 file using [gffcompare](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4643835/).
+
+```
+hmmscan --tblout <Gypsy HMM analysis output> -E 1e-5 --domE 1e-5 <path to gypsy_db_3.1b2.hmm> <path to maker standard proteins fasta> 
+
+blastp -db <Tpases020812 database> -query <path to MAKER standard protein fasta> -out <path to Tpases blast output> -evalue 1e-10 -outfmt 6 
+
+gffcompare -o <TE comparison output file> -r <MSU RGAP TE GFF3> <MAKER standard GFF3>
+```
+The create_no_TE_genelist.py script use the data derived above, the Pfam hmmscan results file and a list of TE-related Pfam domains (TE_Pfam_domains.txt) to create a list of MAKER standard genes with no TE-related predictions.
+
+```
+create_no_TE_genelist.py --input_file_TEpfam <TE_Pfam_domains.txt> --input_file_maxPfam <MAKER max predictions hmmscan output file> --input_file_geneList_toKeep <path to MAKER standard gene list> --input_file_TEhmm <Gypsy HMM analysis output> --input_file_TEblast <path to Tpases blast output> --input_file_TErefmap <TE comparison output refmap file> --output_file <path to TE filtered MAKER standard gene list>
+```
+
+
+
+
+
+
 
 
 
