@@ -65,7 +65,12 @@ while (my $seq_obj= $seqin->next_seq) {
 open my $maker_gff, "$gff" or die " Can't open $gff";
 while (my $line = <$maker_gff>) {
     chomp $line;
-    if ($line =~ /^#/){
+    if ($line =~ /^##FASTA/ || $line =~ /^>/){
+    	# If the gff has the fasta sequence attached to the bottom,
+ 	# we will crash if we attempt to process the fasta section.
+ 	last;
+    }
+    elsif ($line =~ /^#/) {
 	next;
     }
     else{
@@ -89,10 +94,24 @@ while (my $line = <$maker_gff>) {
 		my $feature = $check_cds[2];
 
 		if ($feature =~/CDS/) {
+		    # Now check if this is the first splice form.
+ 		    # We will not process any splice forms after the first.
+ 		    # ID=maker-scaffold702-est_gff_est2genome-gene-15.0-mRNA-1:cds;Parent=....
+ 		    if ($check_cds[8] =~ /mRNA-(\d+):cds;Parent=/) {
+ 			my $variant_count = $1;
+
+ 			print "$check_cds[8]\n";
+ 			print "$variant_count\n";
+
+ 			if ($variant_count != 1) {
+ 			    # This is not the first splice form.
+ 			    last;
+ 			}
+ 		    }
 		    push @start, $check_cds[3];
 		    push @end, $check_cds[4];
 		}
-		elsif (($feature =~ /exon/) || ($feature =~ /contig/) || ($feature =~/three/) || ($feature=~/five/))  {
+		elsif (($feature =~ /mRNA/) || ($feature =~ /exon/) || ($feature =~ /contig/) || ($feature =~/three/) || ($feature=~/five/))  {
 		    
 		}
 		else {
@@ -201,7 +220,7 @@ while (my $seq_obj= $seqin2->next_seq) {
     $total_G += $G;
     $GC += $G + $C;
     $total_gc_count += $GC;
-    $total = $total + $A + $C + $G + $T;
+    $total = $A + $C + $G + $T;
     $total_all = $total_all + $A + $C + $G + $T;
     my $GC_content = ($GC/$total)*100;
     my $rounded_GC_content = int($GC_content + 0.5);
